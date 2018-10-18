@@ -1,0 +1,1 @@
+# adfv2-load-http-to-azuretable
