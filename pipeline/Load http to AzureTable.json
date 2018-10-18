@@ -1,0 +1,61 @@
+{
+	"name": "Load http to AzureTable",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy",
+				"type": "Copy",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "HttpSource",
+						"httpRequestTimeout": "00:01:40"
+					},
+					"sink": {
+						"type": "AzureTableSink",
+						"azureTableInsertType": "merge",
+						"azureTableDefaultPartitionKeyValue": "1",
+						"writeBatchSize": 10000
+					},
+					"enableStaging": false,
+					"dataIntegrationUnits": 0,
+					"translator": {
+						"type": "TabularTranslator",
+						"columnMappings": {
+							"countryCode": "countryCode",
+							"countryName": "countryName",
+							"gmtOffset": "gmtOffset",
+							"timestamp": "timestamp",
+							"zoneName": "zoneName"
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "HttpFile",
+						"type": "DatasetReference",
+						"parameters": {
+							"token": {
+								"type": "SecureString",
+								"value": "**********"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureTable",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

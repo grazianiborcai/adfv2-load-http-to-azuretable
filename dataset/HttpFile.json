@@ -1,0 +1,54 @@
+{
+	"name": "HttpFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"token": {
+				"type": "SecureString"
+			}
+		},
+		"type": "HttpFile",
+		"structure": [
+			{
+				"name": "countryCode",
+				"type": "String"
+			},
+			{
+				"name": "countryName",
+				"type": "String"
+			},
+			{
+				"name": "zoneName",
+				"type": "String"
+			},
+			{
+				"name": "gmtOffset",
+				"type": "Int64"
+			},
+			{
+				"name": "timestamp",
+				"type": "Int64"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonNodeReference": "$.['zones']",
+				"jsonPathDefinition": {
+					"countryCode": "['countryCode']",
+					"countryName": "['countryName']",
+					"zoneName": "['zoneName']",
+					"gmtOffset": "['gmtOffset']",
+					"timestamp": "['timestamp']"
+				}
+			},
+			"requestMethod": "Get",
+			"additionalHeaders": "Authorization: @dataset().token"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,36 @@
+{
+	"name": "AzureTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureTableStorage",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureTable",
+		"structure": [
+			{
+				"name": "countryCode",
+				"type": "String"
+			},
+			{
+				"name": "countryName",
+				"type": "String"
+			},
+			{
+				"name": "gmtOffset",
+				"type": "Int64"
+			},
+			{
+				"name": "timestamp",
+				"type": "Int64"
+			},
+			{
+				"name": "zoneName",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"tableName": "Test"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
